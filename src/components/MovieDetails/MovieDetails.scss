@@ -1,0 +1,48 @@
+.MovieDetails {
+  .MovieDetails-empty {
+    text-align: center;
+    width: 100%;
+    line-height: 100vh;
+    color: #ccc;
+    font-weight: bold;
+  }
+  .MovieDetails-header {
+    background-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.7), #000);
+    width: 100%;
+    color: #fff;
+    padding: 10em 6em 4em;
+  }
+  .MovieDetails-main {
+    padding: 3em 6em;
+    display: flex;
+    gap: 2em;
+    .MovieDetails-sidebar {
+      width: 30%;
+      flex: none;
+      img {
+        width: 100%;
+        margin-bottom: 1em;
+      }
+    }
+    .MovieDetails-info {
+      border: 1px solid #ccc;
+      display: grid;
+      grid-template-columns: 50% 50%;
+      div {
+        padding: 0.5em;
+      }
+      div:first-child {
+        border-right: 1px solid #ccc;
+      }
+      div:last-child {
+        grid-column: 1 / span 2;
+        border-top: 1px solid #ccc;
+      }
+      span {
+        display: block;
+        color: #ccc;
+        margin-bottom: 0.25em;
+      }
+    }
+  }
+}

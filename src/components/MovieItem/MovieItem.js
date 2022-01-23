@@ -1,0 +1,24 @@
+import React from "react";
+import './MovieItem.scss';
+// import { useDetails } from "../../hooks/useDetails";
+
+const MovieItem = (props) => {
+  const { id, title, year, thumb, selectedMovie, setSelectedMovie } = props;
+  // const { s } = useDetails();
+  return (
+    <li
+      className={`MovieItem ${id === selectedMovie && "active"}`}
+      onClick={() => setSelectedMovie(id)}
+    >
+      <div className="MovieItem-thumb">
+        <img src={thumb} alt={title} />
+      </div>
+      <div className="MovieItem-info">
+        <h4>{title}</h4>
+        <p>({year})</p>
+      </div>
+    </li>
+  );
+};
+
+export default MovieItem;

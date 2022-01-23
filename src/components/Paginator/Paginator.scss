@@ -1,0 +1,20 @@
+.Paginator {
+  position: fixed;
+  width: 30%;
+  bottom: 0;
+  left:0;
+  padding: 1em;
+  display: flex;
+  justify-content: space-between;
+  box-shadow: 0px 0px 5px 0px #ccc;
+  background-color: #fff;
+  button {
+    border: 1px solid #ccc;
+    width: 1.5em;
+    height: 1.5em;
+    padding-top: 3px;
+  }
+  @media screen and (max-width:1023px) {
+    width: 100%;
+  }
+}

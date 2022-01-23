@@ -1,0 +1,42 @@
+.MovieItem {
+  display: flex;
+  cursor: pointer;
+  border-bottom: #ccc 1px solid;
+  padding: 0.5em 1em;
+  text-align: left;
+  &:first-child {
+    border-top: #0066ff 1px solid;
+  }
+  &.active {
+    border-left: #0066ff 3px solid;
+    background-image: linear-gradient(to right, #fff, rgba(0, 102, 255, 0.2));
+    background-position: right;
+    background-repeat: no-repeat;
+    background-size: 50%;
+  }
+
+  .MovieItem-thumb {
+    width: 3em;
+    height: 3em;
+    text-align: center;
+    margin-right: 0.5em;
+    align-self: center;
+    flex: 0 0 auto;
+    img {
+      width: auto;
+      max-width: 100%;
+      height: 3em;
+    }
+  }
+
+  .MovieItem-info {
+    h4 {
+      line-height: 1.5em;
+    }
+    p {
+      line-height: 1.5em;
+      font-size: 0.8em;
+      margin-top: 0.5em;
+    }
+  }
+}

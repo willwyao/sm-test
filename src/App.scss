@@ -1,0 +1,28 @@
+.App {
+  display: flex;
+  flex-flow: row;
+  height: 100vh;
+  overflow: hidden;
+  .App-sidebar {
+    width: 30%;
+    display: flex;
+    flex-flow: column;
+    box-shadow: 0px 0px 10px 0px #ccc;
+    overflow-y: scroll;
+    @media screen and (max-width:1023px) {
+      width: 100%;
+    }
+  }
+  .App-main {
+    width: 70%;
+    overflow-y: scroll;
+    @media screen and (max-width:1023px) {
+      display: none;
+    }
+  }
+}
+
+
+
+
+

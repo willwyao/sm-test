@@ -1,0 +1,35 @@
+.SearchBar {
+  padding-top: 2em;
+  padding-bottom: 2em;
+  display: flex;
+  justify-content: center;
+
+  form {
+    border: #ccc solid 1px;
+    border-radius: 5px;
+    height: 2em;
+    display: flex;
+    &:focus-within {
+      border-color: #0066ff;
+    }
+  }
+  input {
+    border: none;
+    background: none;
+    padding: 0 1em;
+    &:focus {
+      outline: none;
+    }
+  }
+  button {
+    line-height: 2em;
+    width: 2em;
+    font-size: 0.8em;
+
+    padding-top: 2px;
+    &[type="submit"] {
+      font-size: 1em;
+      padding-top: 3px;
+    }
+  }
+}
