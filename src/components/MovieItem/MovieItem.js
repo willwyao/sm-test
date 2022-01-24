@@ -1,10 +1,9 @@
 import React from "react";
 import './MovieItem.scss';
-// import { useDetails } from "../../hooks/useDetails";
 
 const MovieItem = (props) => {
   const { id, title, year, thumb, selectedMovie, setSelectedMovie } = props;
-  // const { s } = useDetails();
+
   return (
     <li
       className={`MovieItem ${id === selectedMovie && "active"}`}
