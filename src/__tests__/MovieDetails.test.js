@@ -1,4 +1,4 @@
-import { render, waitFor, screen } from "@testing-library/react";
+import { render, screen } from "@testing-library/react";
 import MovieDetails from "../components/MovieDetails/MovieDetails";
 
 const emptyDetails = {};

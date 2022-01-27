@@ -1,4 +1,4 @@
-import { render, waitFor, screen } from "@testing-library/react";
+import { render, screen } from "@testing-library/react";
 import MovieList from '../components/MovieList/MovieList';
 import MovieItem from "../components/MovieItem/MovieItem";
 
