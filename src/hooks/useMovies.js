@@ -4,16 +4,16 @@ import { fetchMoviesAsync } from "./utils";
 export const useMovies = (searchTerm, page) => {
   const [movies, setMovies] = React.useState([]);
   const [total, setTotal] = React.useState(0);
-  const [isInitialLoading, setIsInitialLoading] = React.useState(true);
+  const [movieLoading, setMovieLoading] = React.useState(true);
 
-  const getMovies = async (searchTerm, page) => {
+  const getMovies = async () => {
     try {
       const data = await fetchMoviesAsync(searchTerm, page);
       console.log(data);
-      const { Search: results, totalResults, Response } = data;
-      if (Response==='True') {
+      const { Search, totalResults, Response } = data;
+      if (Response === "True") {
         setMovies(
-          results.map((item) => {
+          Search.map((item) => {
             return {
               id: item.imdbID,
               title: item.Title,
@@ -23,30 +23,24 @@ export const useMovies = (searchTerm, page) => {
           })
         );
         setTotal(parseInt(totalResults));
+        setMovieLoading(false);
       } else {
         setMovies([]);
         setTotal(0);
+        setMovieLoading(false);
       }
     } catch (error) {
       console.log(error);
+      setMovies([]);
+      setTotal(0);
+      setMovieLoading(false);
     }
   };
 
   React.useEffect(() => {
-    if (isInitialLoading) return;
+    setMovieLoading(true);
     getMovies(searchTerm, page);
-  }, [page]);
+  }, [searchTerm, page]);
 
-  React.useEffect(() => {
-    if (isInitialLoading) return;
-    getMovies(searchTerm, 1);
-  }, [searchTerm]);
-
-  React.useEffect(() => {
-    if (!isInitialLoading) return;
-    getMovies(searchTerm, page);
-    setIsInitialLoading(false);
-  }, []);
-
-  return { movies, total, getMovies };
+  return { movies, total, movieLoading };
 };

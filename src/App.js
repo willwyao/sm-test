@@ -10,18 +10,20 @@ function App() {
   const [page, setPage] = React.useState(1);
   const [searchTerm, setSearchTerm] = React.useState("star");
   const [selectedMovie, setSelectedMovie] = React.useState("");
-  const { total, movies, getMovies } = useMovies(searchTerm, page);
-  const { details } = useDetails(selectedMovie);
+  const { total, movies, movieLoading } = useMovies(searchTerm, page);
+  const { details, detailsLoading } = useDetails(selectedMovie);
 
   return (
     <div className="App">
       <section className="App-sidebar">
         <SearchBar {...{ searchTerm, setSearchTerm, setPage }} />
-        <MovieList {...{ movies, selectedMovie, setSelectedMovie }} />
+        <MovieList
+          {...{ movies, movieLoading, selectedMovie, setSelectedMovie }}
+        />
         {total > 10 && <Paginator {...{ total, page, setPage }} />}
       </section>
       <section className="App-main">
-        <MovieDetails {...{ details }} />
+        <MovieDetails {...{ details, detailsLoading }} />
       </section>
     </div>
   );
