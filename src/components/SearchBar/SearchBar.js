@@ -1,18 +1,20 @@
 import React from "react";
 import { FaSistrix } from "react-icons/fa";
 import "./SearchBar.scss";
+import { connect } from "react-redux";
+import { searchMovie, clearSearch } from "../../store/actionCreators";
 
-const SearchBar = ({ searchTerm, setSearchTerm, setPage }) => {
+const SearchBar = ({ searchTerm, searchMovie, clearSearch }) => {
   const [inputValue, setInputValue] = React.useState(searchTerm);
 
-  const clearSearch = () => {
-    setInputValue('');
-    setSearchTerm('');
+  const handleClear = () => {
+    setInputValue("");
+    clearSearch();
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    setSearchTerm(inputValue);
+    searchMovie(inputValue);
   };
 
   return (
@@ -25,8 +27,8 @@ const SearchBar = ({ searchTerm, setSearchTerm, setPage }) => {
           onChange={(e) => setInputValue(e.target.value)}
           placeholder="Search here"
         />
-        {inputValue===searchTerm ? (
-          <button onClick={clearSearch}>X</button>
+        {inputValue === searchTerm ? (
+          <button onClick={handleClear}>X</button>
         ) : (
           <button type="submit">
             <FaSistrix />
@@ -37,4 +39,21 @@ const SearchBar = ({ searchTerm, setSearchTerm, setPage }) => {
   );
 };
 
-export default SearchBar;
+const mapStateToProps = (state) => {
+  return {
+    searchTerm: state.searchTerm,
+  };
+};
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    searchMovie: (searchTerm) => {
+      dispatch(searchMovie(searchTerm));
+    },
+    clearSearch: () => {
+      dispatch(clearSearch());
+    },
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(SearchBar);

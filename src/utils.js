@@ -1,4 +1,4 @@
-import config from "../config.json";
+import config from "./config.json";
 const API_URL = config.API_URL;
 const API_KEY = config.API_KEY;
 

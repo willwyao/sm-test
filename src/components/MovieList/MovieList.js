@@ -1,13 +1,13 @@
 import React from "react";
 import MovieItem from "../MovieItem/MovieItem";
 import "./MovieList.scss";
+import { connect } from "react-redux";
+import { listMovie } from "../../store/actionCreators";
 
-const MovieList = ({
-  movies,
-  movieLoading,
-  selectedMovie,
-  setSelectedMovie,
-}) => {
+const MovieList = ({ movies, movieLoading, searchTerm, page, listMovie }) => {
+  React.useEffect(() => {
+    listMovie(searchTerm, page);
+  }, [searchTerm, page, listMovie]);
   if (movieLoading === true) {
     return <div className="MovieList empty">Movie list is loading...</div>;
   } else {
@@ -17,20 +17,8 @@ const MovieList = ({
       return (
         <div className="MovieList">
           <ul>
-            {movies.map(({ id, title, year, thumb }) => {
-              return (
-                <MovieItem
-                  key={id}
-                  {...{
-                    id,
-                    title,
-                    year,
-                    thumb,
-                    selectedMovie,
-                    setSelectedMovie,
-                  }}
-                />
-              );
+            {movies.map((movie) => {
+              return <MovieItem key={movie.id} movie={movie} />;
             })}
           </ul>
         </div>
@@ -39,4 +27,21 @@ const MovieList = ({
   }
 };
 
-export default MovieList;
+const mapStateToProps = (state) => {
+  return {
+    movies: state.movies,
+    movieLoading: state.movieLoading,
+    searchTerm: state.searchTerm,
+    page: state.page,
+  };
+};
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    listMovie: (searchTerm, page) => {
+      dispatch(listMovie(searchTerm, page));
+    },
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(MovieList);

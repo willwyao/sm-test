@@ -1,15 +1,11 @@
 import React from "react";
 import { BiLeftArrow, BiRightArrow } from "react-icons/bi";
 import "./Paginator.scss";
+import { connect } from "react-redux";
+import { prevPage, nextPage } from "../../store/actionCreators";
 
-const Paginator = ({ page, total, setPage }) => {
+const Paginator = ({ page, total, prevPage, nextPage }) => {
   const maxPage = Math.ceil(total / 10);
-  const prevPage = () => {
-    setPage(page > 1 ? page - 1 : 1);
-  };
-  const nextPage = () => {
-    setPage(page < maxPage ? page + 1 : maxPage);
-  };
   return (
     <div className="Paginator">
       <button className="prev" onClick={prevPage}>
@@ -23,4 +19,22 @@ const Paginator = ({ page, total, setPage }) => {
   );
 };
 
-export default Paginator;
+const mapStateToProps = (state) => {
+  return {
+    page: state.page,
+    total: state.total,
+  };
+};
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    prevPage: () => {
+      dispatch(prevPage());
+    },
+    nextPage: () => {
+      dispatch(nextPage());
+    },
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Paginator);

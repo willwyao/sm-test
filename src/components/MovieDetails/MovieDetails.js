@@ -1,7 +1,19 @@
 import React from "react";
 import "./MovieDetails.scss";
+import { connect } from "react-redux";
+import { loadDetails } from "../../store/actionCreators";
 
-const MovieDetails = ({ details, detailsLoading }) => {
+const MovieDetails = ({
+  details,
+  detailsLoading,
+  selectedMovie,
+  loadDetails,
+}) => {
+  React.useEffect(() => {
+    if (selectedMovie) {
+      loadDetails(selectedMovie);
+    }
+  }, [selectedMovie, loadDetails]);
   if (detailsLoading === true) {
     return (
       <div className="MovieDetails">
@@ -66,4 +78,18 @@ const MovieDetails = ({ details, detailsLoading }) => {
   }
 };
 
-export default MovieDetails;
+const mapStateToProps = (state) => {
+  return {
+    details: state.details,
+    detailsLoading: state.detailsLoading,
+    selectedMovie: state.selectedMovie,
+  };
+};
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    loadDetails: (selectedMovie) => dispatch(loadDetails(selectedMovie)),
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(MovieDetails);

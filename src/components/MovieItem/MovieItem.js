@@ -1,13 +1,15 @@
 import React from "react";
-import './MovieItem.scss';
+import "./MovieItem.scss";
+import { connect } from "react-redux";
+import { selectMovie } from "../../store/actionCreators";
 
 const MovieItem = (props) => {
-  const { id, title, year, thumb, selectedMovie, setSelectedMovie } = props;
-
+  const { movie, selectedMovie, selectMovie } = props;
+  const { id, title, thumb, year } = movie;
   return (
     <li
       className={`MovieItem ${id === selectedMovie && "active"}`}
-      onClick={() => setSelectedMovie(id)}
+      onClick={() => selectMovie(id)}
     >
       <div className="MovieItem-thumb">
         <img src={thumb} alt={title} />
@@ -20,4 +22,18 @@ const MovieItem = (props) => {
   );
 };
 
-export default MovieItem;
+const mapStateToProps = (state) => {
+  return {
+    selectedMovie: state.selectedMovie,
+  };
+};
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    selectMovie: (movieId) => {
+      dispatch(selectMovie(movieId));
+    },
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(MovieItem);
