@@ -6,12 +6,6 @@ import Paginator from "./components/Paginator/Paginator";
 import MovieDetails from "./components/MovieDetails/MovieDetails";
 import { connect } from "react-redux";
 function App({ total }) {
-  // const [page, setPage] = React.useState(1);
-  // const [searchTerm, setSearchTerm] = React.useState("star");
-  // const [selectedMovie, setSelectedMovie] = React.useState("");
-  // const { total, movies, movieLoading } = useMovies(searchTerm, page);
-  // const { details, detailsLoading } = useDetails(selectedMovie);
-
   return (
     <div className="App">
       <section className="App-sidebar">
